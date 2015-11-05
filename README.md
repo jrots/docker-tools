@@ -1,5 +1,5 @@
 # docker-tools
-Tools for the docker
+Tools for docker
 
 ## Installation
 
