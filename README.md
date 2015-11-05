@@ -1,5 +1,5 @@
-# docker-mm-tools
-Tools for the MM-docker
+# docker-tools
+Tools for the docker
 
 ## Installation
 
