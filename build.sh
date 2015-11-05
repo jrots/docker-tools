@@ -8,16 +8,30 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ ! -z $VISCOSITY_CONNECTION_NAME ]
 then
 	VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
-	if [ "$VPN_STATE" != "Connected" ]
+	if [ "$VISCOSITY_CONNECTION_NAME" != "---" ]
 	then
-		echo "Connecting to vpn"
-		osascript -e "tell application \"Viscosity\" to connect \"$VISCOSITY_CONNECTION_NAME\""
+		if [ "$VPN_STATE" != "Connected" ]
+		then
+			echo "Connecting to VPN \"$VISCOSITY_CONNECTION_NAME\""
+			osascript -e "tell application \"Viscosity\" to connect \"$VISCOSITY_CONNECTION_NAME\""
+		fi
+		while [ "$VPN_STATE" != "Connected" ]
+		do
+			sleep .5
+			VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
+		done
+	else
+		if [ "$VPN_STATE" != "Disconnected" ]
+		then
+			echo "Disconnecting from all VPN connections"
+			osascript -e "tell application \"Viscosity\" to disconnectall"
+		fi
+		while [ "$VPN_STATE" != "Disconnected" ]
+		do
+			sleep .5
+			VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
+		done
 	fi
-	while [ "$VPN_STATE" != "Connected" ]
-	do
-		sleep .5
-		VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
-	done
 fi
 
 STOP_DOCKER="0"
