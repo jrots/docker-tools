@@ -1,16 +1,26 @@
 #!/bin/bash
-CONTAINER_NAME="mm-dev"
+
+#Init config
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. $DIR/config.sh
+
+#Check if it is running
+if [ "$( docker-machine status "$DOCKER_MACHINE_NAME" )" != "Running" ]
+then
+	echo "Docker-machine "$DOCKER_MACHINE_NAME" is not running"
+	exit
+fi
 
 #Set env values
-eval "$( docker-machine env default )"
+eval "$( docker-machine env "$DOCKER_MACHINE_NAME" )"
 
 #Fetch the container id of mm-dev
-DOCKER_CONTAINERID="$( docker ps | grep "$CONTAINER_NAME" | cut -f 1 -d " " )"
+DOCKER_CONTAINERID="$( docker ps | grep "$DOCKER_IMAGE_NAME" | cut -f 1 -d " " )"
 
 #Checking if id is set
 if [ -z $DOCKER_CONTAINERID ]
 then
-	echo "Docker-container $CONTAINER_NAME is not running"
+	echo "Docker-container $DOCKER_IMAGE_NAME is not running"
 	exit
 fi
 

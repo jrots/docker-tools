@@ -56,5 +56,5 @@ then
 fi
 eval "$( docker-machine env "$DOCKER_MACHINE_NAME" )"
 
-#Start container
-$DOCKER_STARTSCRIPT
+#Build container
+$DOCKER_BUILDSCRIPT
