@@ -25,10 +25,13 @@ then
 fi
 
 #Run passed command
-COMMAND="$( printf '"%s" ' "$@" )"
+if [ $# == 1 ]
+then
+	COMMAND=$@
+else
+	COMMAND="$( printf '"%s" ' "$@" )"
+fi
 docker exec -i "$DOCKER_CONTAINERID" bash << EOF
-
-	cd /opt/code
 
 	if [ ${#COMMAND} > 0 ] && [[ ! "${COMMAND}" =~ ^[[:space:]].*$ ]]
 	then

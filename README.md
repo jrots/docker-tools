@@ -42,6 +42,8 @@ Used to start the docker-container. It will automatically check your Viscosity-c
 Used to run a command inside the docker-container.
 ```shell
 ./exec.sh echo something
+./exec.sh echo "something else"
+./exec.sh "echo something && echo something else"
 ```
 
 ### stop.sh
