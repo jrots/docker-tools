@@ -17,9 +17,7 @@ git clone https://github.com/LowieHuyghe/docker-tools.git
 ### Configuration
 1. Make a copy of `config.example.sh` and rename it to `config.sh`.
 2. Make sure `config.sh` is executable by running
-```shell
-chmod +x config.sh
-```
+`chmod +x config.sh`
 3. Change the configuration to your needs.
 
 ### Pro-tip
