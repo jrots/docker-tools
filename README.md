@@ -7,14 +7,16 @@ Tools to easily get going with your docker-container. Start, stop, restart, buil
 * Docker - Your development container (https://www.docker.com/)
 * Viscocity - Manages your VPN connections (optional) (https://www.sparklabs.com/viscosity/)
 
+> Note: AppleScript is used to control Viscosity. If this does not work for you, just disable VPN in the `config.sh`. (Or if you're running Windows, take a look [here](https://www.sparklabs.com/support/viswin_command_line))
+
 ### Initialization
 Start with cloning this repository to your local machine.
 ```shell
 git clone https://github.com/LowieHuyghe/docker-tools.git
 ```
 ### Configuration
-1. Make a copy of ```config.example.sh``` and rename it to ```config.sh```.
-2. Make sure ```config.sh``` is executable by running
+1. Make a copy of `config.example.sh` and rename it to `config.sh`.
+2. Make sure `config.sh` is executable by running
 ```shell
 chmod +x config.sh
 ```
