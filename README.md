@@ -5,9 +5,9 @@ Tools to easily get going with your docker-container. Start, stop, restart, buil
 
 ### Requirements
 * Docker - Your development container (https://www.docker.com/)
-* Viscocity - Manages your VPN connections (optional) (https://www.sparklabs.com/viscosity/)
+* (Optional) Viscocity or Tunnelblick - Manages your VPN connections (https://www.sparklabs.com/viscosity/ or https://tunnelblick.net/)
 
-> Note: AppleScript is used to control Viscosity. If this does not work for you, just disable VPN in the `config.sh`. (Or if you're running Windows, take a look [here](https://www.sparklabs.com/support/viswin_command_line))
+> Note: AppleScript is used to control the VPN connections with Viscosity or Tunnelblick. If this does not work for you, just disable VPN in the `config.sh`.
 
 ### Initialization
 Start with cloning this repository to your local machine.

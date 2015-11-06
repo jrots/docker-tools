@@ -5,31 +5,67 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $DIR/config.sh
 
 #Fix VPN state
-if [ ! -z $VISCOSITY_CONNECTION_NAME ]
+#Viscosity
+if [ ! -z "$VISCOSITY_CONNECTION_NAME" ]
 then
-	VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
 	if [ "$VISCOSITY_CONNECTION_NAME" != "---" ]
 	then
+		VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the state of first connection where name is equal to \"$VISCOSITY_CONNECTION_NAME\"" )"
+
 		if [ "$VPN_STATE" != "Connected" ]
 		then
 			echo "Connecting to VPN \"$VISCOSITY_CONNECTION_NAME\""
-			osascript -e "tell application \"Viscosity\" to connect \"$VISCOSITY_CONNECTION_NAME\""
+			osascript -e "tell application \"Viscosity\" to connect \"$VISCOSITY_CONNECTION_NAME\"" &> /dev/null
 		fi
 		while [ "$VPN_STATE" != "Connected" ]
 		do
 			sleep .5
-			VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
+			VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the state of first connection where name is equal to \"$VISCOSITY_CONNECTION_NAME\"" )"
 		done
 	else
-		if [ "$VPN_STATE" != "Disconnected" ]
+		VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the name of first connection where state is not equal to \"Disconnected\"" )"
+
+		if [ ! -z "$VPN_STATE" ]
 		then
 			echo "Disconnecting from all VPN connections"
-			osascript -e "tell application \"Viscosity\" to disconnectall"
+			osascript -e "tell application \"Viscosity\" to disconnectall" &> /dev/null
 		fi
-		while [ "$VPN_STATE" != "Disconnected" ]
+		while [ ! -z "$VPN_STATE" ]
 		do
 			sleep .5
-			VPN_STATE="$( osascript -e 'tell application "Viscosity" to get the state of first connection' )"
+			VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the name of first connection where state is not equal to \"Disconnected\"" )"
+		done
+	fi
+fi
+#Tunnelblick
+if [ ! -z "$TUNNELBLICK_CONNECTION_NAME" ]
+then
+	if [ "$TUNNELBLICK_CONNECTION_NAME" != "---" ]
+	then
+		VPN_STATE=$( osascript -e "tell application \"Tunnelblick\" to get state of first configuration where name is equal to \"$TUNNELBLICK_CONNECTION_NAME\"" )
+
+		if [ "$VPN_STATE" != "CONNECTED" ]
+		then
+			echo "Connecting to VPN \"$TUNNELBLICK_CONNECTION_NAME\""
+			osascript -e "tell application \"Tunnelblick\" to connect \"$TUNNELBLICK_CONNECTION_NAME\"" &> /dev/null
+		fi
+		while [ "$VPN_STATE" != "CONNECTED" ]
+		do
+			sleep .5
+			VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get state of first configuration where name is equal to \"$TUNNELBLICK_CONNECTION_NAME\"" )"
+		done
+	else
+		VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get name of first configuration where state is not equal to \"EXITING\"" )"
+
+		if [ ! -z "$VPN_STATE" ]
+		then
+			echo "Disconnecting from all VPN connections"
+			osascript -e "tell application \"Tunnelblick\" to disconnect all" &> /dev/null
+		fi
+		while [ ! -z "$VPN_STATE" ]
+		do
+			sleep .5
+			VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get name of first configuration where state is not equal to \"EXITING\"" )"
 		done
 	fi
 fi
