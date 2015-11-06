@@ -13,14 +13,15 @@ DOCKER_STARTSCRIPT=~/docker/start.sh
 DOCKER_BUILDSCRIPT=~/docker/build.sh
 
 # Wheather or not to require a specific value to be present in /etc/resolv.conf (Optional).
+# This can be used to make sure the dns-settings of the VPN connection are passed.
 DOCKER_DNS_REQUIRED=customdns
 
 # Require a certain VPN connection to run with Viscosity (Optional).
-# If your setup doesn't require a VPN connection with Viscosity, you can leave this value blank or comment it
+# If your setup doesn't require a VPN connection with Viscosity, you can leave this value blank or comment it.
 # When the value is set to '---' all VPN connections will be disconnected.
 VISCOSITY_CONNECTION_NAME=myvpn
 
 # Require a certain VPN connection to run with Tunnelblick (Optional).
-# If your setup doesn't require a VPN connection with Tunnelblick, you can leave this value blank or comment it
+# If your setup doesn't require a VPN connection with Tunnelblick, you can leave this value blank or comment it.
 # When the value is set to '---' all VPN connections will be disconnected.
 TUNNELBLICK_CONNECTION_NAME=myvpn
