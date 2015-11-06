@@ -39,11 +39,11 @@ Used to start the docker-container. It will automatically check your Viscosity-c
 ```
 
 ### exec.sh
-Used to run a command inside the docker-container.
+Used to run a command or a script-file inside the docker-container.
 ```shell
 ./exec.sh echo something
-./exec.sh echo "something else"
 ./exec.sh "echo something && echo something else"
+./exec.sh somefile.sh
 ```
 
 ### stop.sh

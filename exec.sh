@@ -24,19 +24,33 @@ then
 	exit
 fi
 
-#Run passed command
+#Process input
+TYPE=command
 if [ $# == 1 ]
 then
-	COMMAND=$@
-else
-	COMMAND="$( printf '"%s" ' "$@" )"
-fi
-docker exec -i "$DOCKER_CONTAINERID" bash << EOF
+	INPUT=$@
 
-	if [ ${#COMMAND} > 0 ] && [[ ! "${COMMAND}" =~ ^[[:space:]].*$ ]]
+	#Check if file
+	if [ -f "$INPUT" ]
 	then
-		echo '' &> /dev/null #Do this otherwise error when COMMAND is empty
-		$COMMAND
+		TYPE=file
 	fi
+else
+	INPUT="$( printf '"%s" ' "$@" )"
+fi
 
+if [ "$TYPE" == "file" ]
+then
+	#Execute as file
+	docker exec -i "$DOCKER_CONTAINERID" bash < "$INPUT"
+else
+	#Execute as command
+	docker exec -i "$DOCKER_CONTAINERID" bash << EOF
+
+		if [ ${#COMMAND} > 0 ] && [[ ! "${INPUT}" =~ ^[[:space:]].*$ ]]
+		then
+			echo '' &> /dev/null #Do this otherwise error when INPUT is empty
+			$INPUT
+		fi
 EOF
+fi
