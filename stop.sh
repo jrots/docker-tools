@@ -10,7 +10,7 @@ then
 	eval "$( docker-machine env "$DOCKER_MACHINE_NAME" )"
 
 	CONTAINER_ID="$( docker ps | grep "$DOCKER_IMAGE_NAME" | cut -f 1 -d " " )"
-	if [ ! -z $CONTAINER_ID ]
+	if [ ! -z "$CONTAINER_ID" ]
 	then
 		echo "Stopping docker-container"
 		docker stop "$CONTAINER_ID"

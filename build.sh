@@ -115,7 +115,7 @@ fi
 STOP_DOCKER="0"
 
 #Check if is already running
-if [ ! -z $DOCKER_DNS_REQUIRED ] && [ "$STOP_DOCKER" == "0" ] && [ "$( docker-machine status "$DOCKER_MACHINE_NAME" )" == "Running" ]
+if [ ! -z "$DOCKER_DNS_REQUIRED" ] && [ "$STOP_DOCKER" == "0" ] && [ "$( docker-machine status "$DOCKER_MACHINE_NAME" )" == "Running" ]
 then
 	eval "$( docker-machine env "$DOCKER_MACHINE_NAME" )"
 

@@ -18,7 +18,7 @@ eval "$( docker-machine env "$DOCKER_MACHINE_NAME" )"
 DOCKER_CONTAINERID="$( docker ps | grep "$DOCKER_IMAGE_NAME" | cut -f 1 -d " " )"
 
 #Checking if id is set
-if [ -z $DOCKER_CONTAINERID ]
+if [ -z "$DOCKER_CONTAINERID" ]
 then
 	echo "Docker-container $DOCKER_IMAGE_NAME is not running"
 	exit
