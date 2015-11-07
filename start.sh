@@ -23,8 +23,18 @@ then
 			VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the state of first connection where name is equal to \"$VISCOSITY_CONNECTION_NAME\"" )"
 		done
 	else
-		VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the name of first connection where state is not equal to \"Disconnected\"" )"
-
+		VPN_STATE="$( osascript << EOF
+			tell application "Viscosity"
+				try
+					get the name of first connection where state is not equal to "Disconnected"
+				on error errorMessage number errorNumber
+					if errorNumber is not equal to -1719 then
+						log ("Execution error: " & errorMessage & " (" & errorNumber & ")")
+					end if
+				end try
+			end tell
+EOF
+)"
 		if [ ! -z "$VPN_STATE" ]
 		then
 			echo "Disconnecting from all VPN connections"
@@ -33,7 +43,18 @@ then
 		while [ ! -z "$VPN_STATE" ]
 		do
 			sleep .5
-			VPN_STATE="$( osascript -e "tell application \"Viscosity\" to get the name of first connection where state is not equal to \"Disconnected\"" )"
+			VPN_STATE="$( osascript << EOF
+				tell application "Viscosity"
+					try
+						get the name of first connection where state is not equal to "Disconnected"
+					on error errorMessage number errorNumber
+						if errorNumber is not equal to -1719 then
+							log ("Execution error: " & errorMessage & " (" & errorNumber & ")")
+						end if
+					end try
+				end tell
+EOF
+)"
 		done
 	fi
 fi
@@ -55,8 +76,18 @@ then
 			VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get state of first configuration where name is equal to \"$TUNNELBLICK_CONNECTION_NAME\"" )"
 		done
 	else
-		VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get name of first configuration where state is not equal to \"EXITING\"" )"
-
+		VPN_STATE="$( osascript << EOF
+			tell application "Tunnelblick"
+				try
+					get the name of first configuration where state is not equal to "EXITING"
+				on error errorMessage number errorNumber
+					if errorNumber is not equal to -1719 then
+						log ("Execution error: " & errorMessage & " (" & errorNumber & ")")
+					end if
+				end try
+			end tell
+EOF
+)"
 		if [ ! -z "$VPN_STATE" ]
 		then
 			echo "Disconnecting from all VPN connections"
@@ -65,7 +96,18 @@ then
 		while [ ! -z "$VPN_STATE" ]
 		do
 			sleep .5
-			VPN_STATE="$( osascript -e "tell application \"Tunnelblick\" to get name of first configuration where state is not equal to \"EXITING\"" )"
+			VPN_STATE="$( osascript << EOF
+				tell application "Tunnelblick"
+					try
+						get the name of first configuration where state is not equal to "EXITING"
+					on error errorMessage number errorNumber
+						if errorNumber is not equal to -1719 then
+							log ("Execution error: " & errorMessage & " (" & errorNumber & ")")
+						end if
+					end try
+				end tell
+EOF
+)"
 		done
 	fi
 fi
