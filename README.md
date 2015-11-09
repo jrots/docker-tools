@@ -16,6 +16,8 @@ git clone https://github.com/LowieHuyghe/docker-tools.git
 ### Configuration
 1. Make a copy of `config.example.sh` and rename it to `config.sh`.
 2. Change the configuration to your needs.
+3. Read [Usage](#usage)
+4. Enjoy!
 
 ### Pro-tip
 These script were mainly meant to be used with aliases so you can setup your docker-container as easy as 123.
