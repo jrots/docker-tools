@@ -5,6 +5,7 @@ Tools to easily get going with your docker-container. Start, stop, restart, buil
 
 ### Requirements
 * [Docker](https://www.docker.com/) - Your development container
+  * [docker](https://docs.docker.com/)
 * (Optional) [Viscocity](https://www.sparklabs.com/viscosity/) or [Tunnelblick](https://tunnelblick.net/) - Manages your VPN connections
 
 ### Initialization
