@@ -2,6 +2,7 @@
 
 #Init config
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+chmod +x $DIR/config.sh
 . $DIR/config.sh
 
 #Check if it is running
