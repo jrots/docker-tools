@@ -62,3 +62,10 @@ Used to (re)build the docker-image.
 ```shell
 ./build.sh
 ```
+
+### kill.sh
+Used to stop the docker-machine. Forced stopping is optional.
+```shell
+./kill.sh
+./kill.sh -f #Force stop the virtual machine.
+```
