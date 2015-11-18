@@ -40,6 +40,7 @@ Used to start the docker-container. It will automatically check your Viscosity-c
 ### exec.sh
 Used to run a command or a script-file inside the docker-container.
 ```shell
+./exec.sh #opens shell on docker-container
 ./exec.sh echo something
 ./exec.sh "echo something && echo something else"
 ./exec.sh somefile.sh

@@ -36,7 +36,8 @@ then
 	then
 		TYPE=file
 	fi
-else
+elif [ $# != 0 ]
+then
 	INPUT="$( printf '"%s" ' "$@" )"
 fi
 
@@ -45,13 +46,14 @@ then
 	#Execute as file
 	docker exec -i "$DOCKER_CONTAINERID" bash < "$INPUT"
 else
-	#Execute as command
-	docker exec -i "$DOCKER_CONTAINERID" bash << EOF
-
-		if [ ${#COMMAND} > 0 ] && [[ ! "${INPUT}" =~ ^[[:space:]].*$ ]]
-		then
-			echo '' &> /dev/null #Do this otherwise error when INPUT is empty
+	if [ ! -z "$INPUT" ]
+	then
+		#Execute as command
+		docker exec -i "$DOCKER_CONTAINERID" bash << EOF
 			$INPUT
-		fi
 EOF
+	else
+		#Open exec session
+		docker exec -it "$DOCKER_CONTAINERID" bash
+	fi
 fi
