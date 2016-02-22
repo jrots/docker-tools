@@ -49,9 +49,9 @@ else
 	if [ ! -z "$INPUT" ]
 	then
 		#Execute as command
-		docker exec -i "$DOCKER_CONTAINERID" bash << EOF
+		docker exec -i "$DOCKER_CONTAINERID" bash <<- EOF
 			$INPUT
-EOF
+		EOF
 	else
 		#Open exec session
 		docker exec -it "$DOCKER_CONTAINERID" bash

@@ -24,9 +24,11 @@ DOCKER_STARTSCRIPT="/absolute/path/to/docker/start.sh"
 DOCKER_DNS_REQUIRED="customdns"
 
 # Require a certain VPN connection to run with Viscosity (Optional).
+# When commented out Viscosity will be ignored.
 # When the value is set to '---' all VPN connections will be disconnected.
 VISCOSITY_CONNECTION_NAME="myvpn"
 
 # Require a certain VPN connection to run with Tunnelblick (Optional).
+# When commented out Tunnelblick will be ignored.
 # When the value is set to '---' all VPN connections will be disconnected.
 TUNNELBLICK_CONNECTION_NAME="myvpn"
