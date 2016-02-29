@@ -46,6 +46,12 @@ Used to run a command or a script-file inside the docker-container.
 ./exec.sh somefile.sh
 ```
 
+### terminal.sh
+Used to initiate the terminal for usage of docker (like 'Docker Quickstart Terminal').
+```shell
+. ./terminal.sh #remark the first dot there
+```
+
 ### stop.sh
 Used to stop the docker-container. It also removes the cached docker-container (not the docker-image) to make sure that after a rebuild it uses the newly created docker-image.
 ```shell
