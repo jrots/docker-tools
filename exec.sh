@@ -54,7 +54,6 @@ else
 		EOF
 	else
 		#Open exec session
-		docker exec -it "$DOCKER_CONTAINERID" bash
 		docker exec -it "$DOCKER_CONTAINERID" bash --login
 	fi
 fi
